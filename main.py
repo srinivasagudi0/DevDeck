@@ -748,7 +748,7 @@ def show_pull_requests(repo, pulls):
                 """,
                 unsafe_allow_html=True,
             )
-            st.link_button(f"Open PR #{pr['number']}", pr["html_url"], key=f"pr_{pr['id']}", use_container_width=True)
+            st.link_button(f"Open PR #{pr['number']}", pr["html_url"], use_container_width=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -774,7 +774,7 @@ def show_issues(repo, issues):
                 """,
                 unsafe_allow_html=True,
             )
-            st.link_button(f"Open Issue #{issue['number']}", issue["html_url"], key=f"issue_{issue['id']}", use_container_width=True)
+            st.link_button(f"Open Issue #{issue['number']}", issue["html_url"], use_container_width=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
 
