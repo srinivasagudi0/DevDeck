@@ -691,12 +691,11 @@ def show_overview(user, repos, events, repo, pulls, issues, commits, languages, 
 
     with col3:
         body = (
-            f"Projects shipped: {st.session_state['ship_projects']}<br>"
-            f"Hours coded: {st.session_state['ship_hours']}<br>"
-            f"Cookies earned: {st.session_state['ship_cookies']}<br>"
-            f"Repo events shown: {len(repo_events)}"
+            f"Open Issues: {len(issues)}<br>"
+            f"Open PRs: {len(pulls)}<br>"
+            f"Last commit: {turn_time_into_text(repo.get('pushed_at'))}"
         )
-        st.markdown(card_html("Hack Club Ship Log", body, "🚢"), unsafe_allow_html=True)
+        st.markdown(card_html("Repository Stats", body, "📊"), unsafe_allow_html=True)
 
     bottom_left, bottom_right = st.columns(2, gap="large")
     with bottom_left:
@@ -711,7 +710,8 @@ def show_overview(user, repos, events, repo, pulls, issues, commits, languages, 
             ("Default Branch", repo.get("default_branch", "Unknown")),
             ("Watchers", str(repo.get("watchers_count", 0))),
             ("Subscribers", str(repo.get("subscribers_count", 0))),
-            ("License", repo.get("license", {}).get("name", "No license")),
+            ("License", repo.get("license").get("name", "No license") if repo.get("license") else "No license"),
+            
             ("Homepage", repo.get("homepage") or "No homepage"),
         ]
         for label, value in details:
@@ -835,10 +835,10 @@ def run():
         username = st.text_input("GitHub Username", value=st.session_state.get("username", ""))
         token = st.text_input("GitHub Token", type="password", help="Optional. Adds higher rate limits and can unlock your own private profile data.")
 
-        st.header("Ship Log")
-        st.session_state["ship_projects"] = st.number_input("Projects shipped", min_value=0, step=1, value=st.session_state["ship_projects"])
-        st.session_state["ship_hours"] = st.number_input("Hours coded", min_value=0, step=1, value=st.session_state["ship_hours"])
-        st.session_state["ship_cookies"] = st.number_input("Cookies earned", min_value=0, step=1, value=st.session_state["ship_cookies"])
+        #st.header("Ship Log")
+        #st.session_state["ship_projects"] = st.number_input("Projects shipped", min_value=0, step=1, value=st.session_state["ship_projects"])
+        #st.session_state["ship_hours"] = st.number_input("Hours coded", min_value=0, step=1, value=st.session_state["ship_hours"])
+        #st.session_state["ship_cookies"] = st.number_input("Cookies earned", min_value=0, step=1, value=st.session_state["ship_cookies"])
 
     if not username.strip():
         st.info("Enter a GitHub username in the sidebar to load DevDeck.")
