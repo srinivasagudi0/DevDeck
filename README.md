@@ -1,79 +1,70 @@
 # DevDeck
 
-DevDeck is an early GitHub dashboard project intended to show a developer's repositories, activity, and repo insights in one place.
+DevDeck is a Streamlit dashboard for viewing GitHub repositories, recent activity, pull requests, issues, commit highlights, and simple developer stats in one place.
 
-Right now, this repository contains a small Python prototype that fetches public repository data from the GitHub API. The broader product direction is captured in [Plan.txt](/Users/srinivasagudi/Desktop/DevDock/Plan.txt).
+## Features
 
-## Current Status
+- Select and switch between repositories from the dashboard
+- View recent GitHub activity in a timeline
+- See repository insights like stars, forks, size, issues, pull requests, and languages
+- Check recent commits for the selected repository
+- Use quick links for repo, issue, and pull request pages
+- Copy local helper commands for cloning and opening a repo in VS Code
+- Track a coding streak, recent commit activity, and manual ship log stats
 
-This project is still in a very early stage.
+## Tech Stack
 
-- `testfile.py` contains the current working prototype.
-- `app.py` tries to import `run()` from `main.py`.
-- `main.py` is not present in the repository right now, so `app.py` will not run as-is.
-
-## What The Prototype Does
-
-The current script:
-
-- prompts for a GitHub username
-- fetches that user's public repositories
-- prints repository names to the terminal
-- includes a partially implemented function for repository contribution stats
-
-## Project Goal
-
-The intended DevDeck experience is a lightweight developer dashboard with features like:
-
-- repository listing
-- recent commit activity
-- repository insights such as stars, forks, and size
-- quick actions for common GitHub workflows
-- developer activity tracking
-
-## Tech Direction
-
-Planned stack from the project notes:
-
-- Python backend
+- Python
+- Streamlit
 - GitHub REST API
-- Streamlit for the first UI
+- Requests
 
 ## Requirements
 
 - Python 3.10+
-- `requests`
 
-Install dependencies with:
-
-```bash
-pip install requests
-```
-
-## Running The Current Prototype
-
-Run:
+Install dependencies:
 
 ```bash
-python testfile.py
+pip install -r requirements.txt
 ```
 
-You will be prompted for a GitHub username, and the script will print that user's public repositories.
+## Run
 
-## File Overview
+Start the app with either command:
 
-- [testfile.py](/Users/srinivasagudi/Desktop/DevDock/testfile.py): current GitHub API prototype
-- [app.py](/Users/srinivasagudi/Desktop/DevDock/app.py): app entry point stub that depends on a missing `main.py`
-- [Plan.txt](/Users/srinivasagudi/Desktop/DevDock/Plan.txt): product idea, feature scope, and rough architecture notes
-- [Final_Output.png](/Users/srinivasagudi/Desktop/DevDock/Final_Output.png): project asset/mockup image
+```bash
+streamlit run app.py
+```
 
-## Next Steps
+```bash
+streamlit run main.py
+```
 
-- add the missing `main.py` or update `app.py`
-- move API logic into reusable functions
-- add error handling for invalid usernames and rate limits
-- build the first Streamlit interface
+## How To Use
+
+1. Enter a GitHub username in the sidebar.
+2. Optionally enter a GitHub token for better rate limits and access to your own authenticated profile data.
+3. Pick a repository from the selector or the repository list.
+4. Use the tabs to view overview, pull requests, issues, and tasks.
+
+## Inputs
+
+- `GitHub Username`: required
+- `GitHub Token`: optional
+- `Projects shipped`: manual ship log value
+- `Hours coded`: manual ship log value
+- `Cookies earned`: manual ship log value
+
+## Project Files
+
+- [main.py](/Users/srinivasagudi/Desktop/DevDock/main.py): main Streamlit app
+- [app.py](/Users/srinivasagudi/Desktop/DevDock/app.py): small launcher file
+- [requirements.txt](/Users/srinivasagudi/Desktop/DevDock/requirements.txt): project dependencies
+- [Plan.txt](/Users/srinivasagudi/Desktop/DevDock/Plan.txt): original product plan
 
 ## Notes
 
-This repository is currently a prototype rather than a finished application.
+- Public GitHub profiles work without a token.
+- Some local-machine actions cannot be run directly by Streamlit, so DevDeck shows them as copyable commands instead.
+- Private repository access depends on the token you provide.
